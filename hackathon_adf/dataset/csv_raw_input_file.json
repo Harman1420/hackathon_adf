@@ -1,0 +1,38 @@
+{
+	"name": "csv_raw_input_file",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "csv_ip_file",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"csv ip path dir": {
+				"type": "string"
+			},
+			"csv ip file name": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": {
+					"value": "@dataset().csv ip file name",
+					"type": "Expression"
+				},
+				"folderPath": {
+					"value": "@dataset().csv ip path dir",
+					"type": "Expression"
+				},
+				"container": "storageforhackathondemo"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": []
+	}
+}
