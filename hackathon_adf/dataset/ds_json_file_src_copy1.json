@@ -29,10 +29,7 @@
 					"value": "@dataset().Directory",
 					"type": "Expression"
 				},
-				"container": {
-					"value": "@dataset().Container",
-					"type": "Expression"
-				}
+				"container": "storageforhackathondemo"
 			}
 		},
 		"schema": {
