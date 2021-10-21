@@ -61,8 +61,11 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "ds_csv_file",
-						"type": "DatasetReference"
+						"referenceName": "ds_csv_stg_op_file",
+						"type": "DatasetReference",
+						"parameters": {
+							"p_csv_op_file": "csv-stage-blob"
+						}
 					}
 				]
 			},
@@ -88,7 +91,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "SnowflakeSource",
-						"query": "copy into customer_dev_raw.customer.BASIC_T_CUSTOMER from @customer_dev_raw.common.STANDARD_STAGE\n pattern='.*.csv'  FILE_FORMAT = (format_name=CSV_FORMAT)",
+						"query": "copy into customer_dev_raw.customer.BASIC_T_CUSTOMER from @customer_dev_raw.common.STANDARD_STAGE\n pattern='.*.csv'  FILE_FORMAT = (format_name=customer_dev_raw.customer.CSV_FORMAT)",
 						"exportSettings": {
 							"type": "SnowflakeExportCopyCommand"
 						}
@@ -98,71 +101,6 @@
 						"type": "DatasetReference"
 					}
 				}
-			},
-			{
-				"name": "ac_move_raw_files_to_archive",
-				"type": "Copy",
-				"dependsOn": [],
-				"policy": {
-					"timeout": "7.00:00:00",
-					"retry": 0,
-					"retryIntervalInSeconds": 30,
-					"secureOutput": false,
-					"secureInput": false
-				},
-				"userProperties": [],
-				"typeProperties": {
-					"source": {
-						"type": "DelimitedTextSource",
-						"storeSettings": {
-							"type": "AzureBlobStorageReadSettings",
-							"recursive": true,
-							"enablePartitionDiscovery": false
-						},
-						"formatSettings": {
-							"type": "DelimitedTextReadSettings"
-						}
-					},
-					"sink": {
-						"type": "DelimitedTextSink",
-						"storeSettings": {
-							"type": "AzureBlobStorageWriteSettings"
-						},
-						"formatSettings": {
-							"type": "DelimitedTextWriteSettings",
-							"quoteAllText": true,
-							"fileExtension": ".txt"
-						}
-					},
-					"enableStaging": false,
-					"translator": {
-						"type": "TabularTranslator",
-						"typeConversion": true,
-						"typeConversionSettings": {
-							"allowDataTruncation": true,
-							"treatBooleanAsNumber": false
-						}
-					}
-				},
-				"inputs": [
-					{
-						"referenceName": "ds_csv_file",
-						"type": "DatasetReference",
-						"parameters": {
-							"p_csv_ip_path_dir": "raw-csv-files",
-							"p_csv_ip_file_name": "new_newstore.csv"
-						}
-					}
-				],
-				"outputs": [
-					{
-						"referenceName": "ds_csv_stg_op_file",
-						"type": "DatasetReference",
-						"parameters": {
-							"p_csv_op_file": "archive-raw-files"
-						}
-					}
-				]
 			}
 		],
 		"annotations": []
