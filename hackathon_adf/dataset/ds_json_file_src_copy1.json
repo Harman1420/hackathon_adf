@@ -11,6 +11,9 @@
 			},
 			"Directory": {
 				"type": "string"
+			},
+			"File": {
+				"type": "string"
 			}
 		},
 		"annotations": [],
@@ -18,8 +21,18 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"fileName": "COUNTRIES.json",
-				"container": "raw-json-files"
+				"fileName": {
+					"value": "@dataset().File",
+					"type": "Expression"
+				},
+				"folderPath": {
+					"value": "@dataset().Directory",
+					"type": "Expression"
+				},
+				"container": {
+					"value": "@dataset().Container",
+					"type": "Expression"
+				}
 			}
 		},
 		"schema": {
