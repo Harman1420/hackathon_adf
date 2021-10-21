@@ -1,0 +1,40 @@
+{
+	"name": "ds_json_file_src_copy1",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureBlobStorage1",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"Container": {
+				"type": "string"
+			},
+			"Directory": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "COUNTRIES.json",
+				"container": "raw-json-files"
+			}
+		},
+		"schema": {
+			"type": "object",
+			"properties": {
+				"COUNTRY_ID": {
+					"type": "string"
+				},
+				"COUNTRY_NAME": {
+					"type": "string"
+				},
+				"REGION_ID": {
+					"type": "integer"
+				}
+			}
+		}
+	}
+}
