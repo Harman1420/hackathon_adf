@@ -1,10 +1,10 @@
 {
-	"name": "csvloadtosf",
+	"name": "p_csvloadtosf",
 	"properties": {
 		"description": "Loading csv file to snowflake table",
 		"activities": [
 			{
-				"name": "ac_copy_to_std_layer",
+				"name": "ac_copy_to_stdstg_layer",
 				"description": "Loads the raw csv file to standard layer blob (staging area)",
 				"type": "Copy",
 				"dependsOn": [],
@@ -51,20 +51,115 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "csv_raw_input_file",
+						"referenceName": "ds_csv_file",
 						"type": "DatasetReference",
 						"parameters": {
-							"csv ip path dir": "raw-csv-files",
-							"csv ip file name": "new_newstore.csv"
+							"p_csv_ip_path_dir": "raw-csv-files",
+							"p_csv_ip_file_name": "new_newstore.csv"
 						}
 					}
 				],
 				"outputs": [
 					{
-						"referenceName": "csv_std_op_file",
+						"referenceName": "ds_csv_file",
+						"type": "DatasetReference"
+					}
+				]
+			},
+			{
+				"name": "ac_copy_stg_to_sf",
+				"type": "Lookup",
+				"dependsOn": [
+					{
+						"activity": "ac_copy_to_stdstg_layer",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "SnowflakeSource",
+						"query": "copy into customer_dev_raw.customer.BASIC_T_CUSTOMER from @customer_dev_raw.common.STANDARD_STAGE\n pattern='.*.csv'  FILE_FORMAT = (format_name=CSV_FORMAT)",
+						"exportSettings": {
+							"type": "SnowflakeExportCopyCommand"
+						}
+					},
+					"dataset": {
+						"referenceName": "Snowflake_table",
+						"type": "DatasetReference"
+					}
+				}
+			},
+			{
+				"name": "ac_move_raw_files_to_archive",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "DelimitedTextSource",
+						"storeSettings": {
+							"type": "AzureBlobStorageReadSettings",
+							"recursive": true,
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "DelimitedTextReadSettings"
+						}
+					},
+					"sink": {
+						"type": "DelimitedTextSink",
+						"storeSettings": {
+							"type": "AzureBlobStorageWriteSettings"
+						},
+						"formatSettings": {
+							"type": "DelimitedTextWriteSettings",
+							"quoteAllText": true,
+							"fileExtension": ".txt"
+						}
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "ds_csv_file",
 						"type": "DatasetReference",
 						"parameters": {
-							"csv op file": "csv-stage-blob"
+							"p_csv_ip_path_dir": "raw-csv-files",
+							"p_csv_ip_file_name": "new_newstore.csv"
+						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "ds_csv_stg_op_file",
+						"type": "DatasetReference",
+						"parameters": {
+							"p_csv_op_file": "archive-raw-files"
 						}
 					}
 				]

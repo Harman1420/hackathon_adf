@@ -1,12 +1,12 @@
 {
-	"name": "csv_std_op_file",
+	"name": "ds_csv_stg_op_file",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "csv_op_file",
 			"type": "LinkedServiceReference"
 		},
 		"parameters": {
-			"csv op file": {
+			"p_csv_op_file": {
 				"type": "string"
 			}
 		},
@@ -15,11 +15,10 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"folderPath": {
-					"value": "@dataset().csv op file",
+				"container": {
+					"value": "@dataset().p_csv_op_file",
 					"type": "Expression"
-				},
-				"container": "storageforhackathondemo"
+				}
 			},
 			"columnDelimiter": ",",
 			"escapeChar": "\\",

@@ -1,0 +1,83 @@
+{
+	"name": "Snowflake_table",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_Snowflake",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SnowflakeTable",
+		"schema": [
+			{
+				"name": "META_SEQ_ID",
+				"type": "NUMBER",
+				"precision": 38,
+				"scale": 0
+			},
+			{
+				"name": "ORDER_ID",
+				"type": "VARCHAR",
+				"precision": 0,
+				"scale": 0
+			},
+			{
+				"name": "CLASS",
+				"type": "VARCHAR",
+				"precision": 0,
+				"scale": 0
+			},
+			{
+				"name": "CUSTOMER_ID",
+				"type": "VARCHAR",
+				"precision": 0,
+				"scale": 0
+			},
+			{
+				"name": "CUSTOMER_NAME",
+				"type": "VARCHAR",
+				"precision": 0,
+				"scale": 0
+			},
+			{
+				"name": "META_SOURCE_TS",
+				"type": "TIMESTAMP_TZ",
+				"precision": 29,
+				"scale": 9
+			},
+			{
+				"name": "META_CREATED_DATE",
+				"type": "TIMESTAMP_TZ",
+				"precision": 29,
+				"scale": 9
+			},
+			{
+				"name": "META_MODIFIED_DATE",
+				"type": "TIMESTAMP_TZ",
+				"precision": 29,
+				"scale": 9
+			},
+			{
+				"name": "META_JOB_RUN_ID",
+				"type": "VARCHAR",
+				"precision": 0,
+				"scale": 0
+			},
+			{
+				"name": "META_SOURCE_PATH",
+				"type": "VARCHAR",
+				"precision": 0,
+				"scale": 0
+			},
+			{
+				"name": "META_SOURCE_FILE_NAME",
+				"type": "VARCHAR",
+				"precision": 0,
+				"scale": 0
+			}
+		],
+		"typeProperties": {
+			"schema": "CUSTOMER",
+			"table": "T_CUSTOMER"
+		}
+	}
+}
