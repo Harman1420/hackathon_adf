@@ -20,6 +20,7 @@
 						"storeSettings": {
 							"type": "AzureBlobStorageReadSettings",
 							"recursive": true,
+							"wildcardFileName": "*.json",
 							"enablePartitionDiscovery": false
 						},
 						"formatSettings": {
@@ -27,25 +28,62 @@
 						}
 					},
 					"sink": {
-						"type": "JsonSink",
+						"type": "DelimitedTextSink",
 						"storeSettings": {
 							"type": "AzureBlobStorageWriteSettings"
 						},
 						"formatSettings": {
-							"type": "JsonWriteSettings"
+							"type": "DelimitedTextWriteSettings",
+							"quoteAllText": true,
+							"fileExtension": ".csv"
 						}
 					},
-					"enableStaging": false
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"path": "$['COUNTRY_ID']"
+								},
+								"sink": {
+									"name": "COUNTRY_ID",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['COUNTRY_NAME']"
+								},
+								"sink": {
+									"name": "COUNTRY_NAME",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['REGION_ID']"
+								},
+								"sink": {
+									"name": "REGION_ID",
+									"type": "String"
+								}
+							}
+						]
+					}
 				},
 				"inputs": [
 					{
 						"referenceName": "ds_json_file_src",
-						"type": "DatasetReference"
+						"type": "DatasetReference",
+						"parameters": {
+							"container": "raw-json-files"
+						}
 					}
 				],
 				"outputs": [
 					{
-						"referenceName": "ds_json_file_tgt",
+						"referenceName": "ds_csv_temp",
 						"type": "DatasetReference"
 					}
 				]
