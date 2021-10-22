@@ -5,12 +5,20 @@
 			"referenceName": "AzureBlobStorage1",
 			"type": "LinkedServiceReference"
 		},
+		"parameters": {
+			"container": {
+				"type": "string"
+			}
+		},
 		"annotations": [],
 		"type": "Json",
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"container": "raw-json-files"
+				"container": {
+					"value": "@dataset().container",
+					"type": "Expression"
+				}
 			}
 		},
 		"schema": {
