@@ -20,6 +20,7 @@
 						"storeSettings": {
 							"type": "AzureBlobStorageReadSettings",
 							"recursive": true,
+							"wildcardFileName": "*.json",
 							"enablePartitionDiscovery": false
 						},
 						"formatSettings": {
@@ -39,13 +40,8 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "ds_json_file_src_copy1",
-						"type": "DatasetReference",
-						"parameters": {
-							"Container": "storageforhackathondemo",
-							"Directory": "raw-json-files",
-							"File": "COUNTRIES.json"
-						}
+						"referenceName": "ds_json_file_src",
+						"type": "DatasetReference"
 					}
 				],
 				"outputs": [
