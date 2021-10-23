@@ -19,7 +19,7 @@
 						"referenceName": "generic_binary_dir",
 						"type": "DatasetReference",
 						"parameters": {
-							"container": "archive-raw",
+							"container": "standard-stage",
 							"dir": {
 								"value": "@pipeline().parameters.dir",
 								"type": "Expression"
@@ -90,7 +90,7 @@
 						"referenceName": "generic_binary_dir",
 						"type": "DatasetReference",
 						"parameters": {
-							"container": "standard-stage",
+							"container": "archive",
 							"dir": {
 								"value": "@pipeline().parameters.dir",
 								"type": "Expression"
