@@ -50,7 +50,7 @@
 						"type": "DatasetReference",
 						"parameters": {
 							"container": "standard-raw",
-							"dir": "gitlab",
+							"dir": "gitlab_issue",
 							"file": {
 								"value": "@concat('projrct_issue_',formatDateTime(utcnow(), 'yyyy-MM-dd'),'.json')",
 								"type": "Expression"

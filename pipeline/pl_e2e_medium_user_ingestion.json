@@ -50,7 +50,7 @@
 						"type": "DatasetReference",
 						"parameters": {
 							"container": "standard-raw",
-							"dir": "medium",
+							"dir": "medium_user",
 							"file": {
 								"value": "@concat('user_',formatDateTime(utcnow(), 'yyyy-MM-dd'),'.json')",
 								"type": "Expression"

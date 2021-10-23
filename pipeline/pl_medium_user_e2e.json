@@ -1,5 +1,5 @@
 {
-	"name": "pl_gitlab_project_e2e",
+	"name": "pl_medium_user_e2e",
 	"properties": {
 		"activities": [
 			{
@@ -9,7 +9,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"pipeline": {
-						"referenceName": "pl_e2e_gitlab_src_ingestion_project",
+						"referenceName": "pl_e2e_medium_user_ingestion",
 						"type": "PipelineReference"
 					},
 					"waitOnCompletion": true
@@ -35,7 +35,7 @@
 					"waitOnCompletion": true,
 					"parameters": {
 						"file": "\"\"",
-						"dir": "gitlab_project"
+						"dir": "medium_user"
 					}
 				}
 			},
@@ -82,7 +82,7 @@
 					"waitOnCompletion": true,
 					"parameters": {
 						"container": "\"\"",
-						"dir": "gitlab_project"
+						"dir": "medium_user"
 					}
 				}
 			}
