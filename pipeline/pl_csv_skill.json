@@ -1,0 +1,48 @@
+{
+	"name": "pl_csv_skill",
+	"properties": {
+		"activities": [
+			{
+				"name": "Execute Pipeline2",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "pl_raw_to_stage",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true,
+					"parameters": {
+						"file": "\"\"",
+						"dir": "covid"
+					}
+				}
+			},
+			{
+				"name": "Execute Pipeline3",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "Execute Pipeline2",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "stage_sf",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true,
+					"parameters": {
+						"query": "copy into CUSTOMER_DEV_RAW.TRENDING_TECH.T_TECHNOLOGY\n  from @CUSTOMER_DEV_RAW.TRENDING_TECH.stg_lw_std\nfile_format = (type = csv field_optionally_enclosed_by='\"' skip_header = 1)\npattern='trending_tech/*.csv'\non_error = 'skip_file';"
+					}
+				}
+			}
+		],
+		"annotations": []
+	}
+}
