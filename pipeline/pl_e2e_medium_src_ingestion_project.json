@@ -1,0 +1,65 @@
+{
+	"name": "pl_e2e_medium_src_ingestion_project",
+	"properties": {
+		"activities": [
+			{
+				"name": "ac_get_medium_blog_data_project",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "RestSource",
+						"httpRequestTimeout": "00:01:40",
+						"requestInterval": "00.00:00:00.010",
+						"requestMethod": "GET",
+						"additionalHeaders": {
+							"Authorization": "Bearer NzaHreAj3pjzBJfDp_1b"
+						}
+					},
+					"sink": {
+						"type": "JsonSink",
+						"storeSettings": {
+							"type": "AzureBlobStorageWriteSettings"
+						},
+						"formatSettings": {
+							"type": "JsonWriteSettings"
+						}
+					},
+					"enableStaging": false
+				},
+				"inputs": [
+					{
+						"referenceName": "ds_rest_endpoint_generic",
+						"type": "DatasetReference",
+						"parameters": {
+							"url": "https://gitlab.com/api/v4/projects/29707090"
+						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "ds_Json_file_endpoint_generic_filename",
+						"type": "DatasetReference",
+						"parameters": {
+							"container": "standard-raw",
+							"dir": "gitlab",
+							"file": {
+								"value": "@concat('project_',formatDateTime(utcnow(), 'yyyy-MM-dd'),'.json')",
+								"type": "Expression"
+							}
+						}
+					}
+				]
+			}
+		],
+		"annotations": []
+	}
+}

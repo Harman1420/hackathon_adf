@@ -7,10 +7,6 @@
 		},
 		"annotations": [],
 		"type": "SnowflakeTable",
-		"schema": [],
-		"typeProperties": {
-			"schema": "INFORMATION_SCHEMA",
-			"table": "TABLES"
-		}
+		"schema": []
 	}
 }

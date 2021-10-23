@@ -1,0 +1,65 @@
+{
+	"name": "pl_e2e_medium_user_ingestion",
+	"properties": {
+		"activities": [
+			{
+				"name": "ac_get_medium_user_blog_data",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "RestSource",
+						"httpRequestTimeout": "00:01:40",
+						"requestInterval": "00.00:00:00.010",
+						"requestMethod": "GET",
+						"additionalHeaders": {
+							"Authorization": "Bearer 220aa0d06f283c04324b38b75378f39176a15afc67e38eeb7cbf166249da19fd7"
+						}
+					},
+					"sink": {
+						"type": "JsonSink",
+						"storeSettings": {
+							"type": "AzureBlobStorageWriteSettings"
+						},
+						"formatSettings": {
+							"type": "JsonWriteSettings"
+						}
+					},
+					"enableStaging": false
+				},
+				"inputs": [
+					{
+						"referenceName": "ds_rest_endpoint_user",
+						"type": "DatasetReference",
+						"parameters": {
+							"url": "https://api.medium.com/v1/users/1db62bd5b3a0d48c3a622a90669dc5021f3d2220377f5a2e1e953cb381f7b9fbb/publications"
+						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "ds_Json_file_endpoint_generic_filename",
+						"type": "DatasetReference",
+						"parameters": {
+							"container": "standard-raw",
+							"dir": "medium",
+							"file": {
+								"value": "@concat('user_',formatDateTime(utcnow(), 'yyyy-MM-dd'),'.json')",
+								"type": "Expression"
+							}
+						}
+					}
+				]
+			}
+		],
+		"annotations": []
+	}
+}

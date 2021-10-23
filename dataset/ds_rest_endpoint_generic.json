@@ -8,8 +8,7 @@
 				"url": {
 					"value": "@dataset().url",
 					"type": "Expression"
-				},
-				"key": "''"
+				}
 			}
 		},
 		"parameters": {

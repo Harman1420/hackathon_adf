@@ -3,8 +3,8 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "Web1",
-				"type": "WebActivity",
+				"name": "Lookup1",
+				"type": "Lookup",
 				"dependsOn": [],
 				"policy": {
 					"timeout": "7.00:00:00",
@@ -15,17 +15,18 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"url": "https://v1.nocodeapi.com/architpandita/medium/RqhaGIRBEdJliLwj",
-					"method": "GET",
-					"datasets": [
-						{
-							"referenceName": "ds_rest_endpoint_generic",
-							"type": "DatasetReference",
-							"parameters": {
-								"url": "https://v1.nocodeapi.com/architpandita/medium/RqhaGIRBEdJliLwj"
-							}
+					"source": {
+						"type": "SnowflakeSource",
+						"query": "copy into \"CUSTOMER_DEV_RAW\".\"MEDIUM\".\"T_MEDIUM_BLOG\"\n  from @CUSTOMER_DEV_RAW.MEDIUM.stg_lw_std\nfile_format = (type = csv field_optionally_enclosed_by='\"' skip_header = 1)\npattern='medium/abcd.csv'\non_error = 'skip_file';",
+						"exportSettings": {
+							"type": "SnowflakeExportCopyCommand"
 						}
-					]
+					},
+					"dataset": {
+						"referenceName": "ds_snowflake_endpoint",
+						"type": "DatasetReference"
+					},
+					"firstRowOnly": false
 				}
 			}
 		],
