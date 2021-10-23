@@ -27,33 +27,37 @@
 						}
 					},
 					"sink": {
-						"type": "JsonSink",
+						"type": "DelimitedTextSink",
 						"storeSettings": {
 							"type": "AzureBlobStorageWriteSettings"
 						},
 						"formatSettings": {
-							"type": "JsonWriteSettings"
+							"type": "DelimitedTextWriteSettings",
+							"quoteAllText": true,
+							"fileExtension": ".txt"
 						}
 					},
 					"enableStaging": false
 				},
 				"inputs": [
 					{
-						"referenceName": "ds_Json_file_endpoint_generic_file_name",
+						"referenceName": "ds_Json_file_endpoint_generic_filename",
 						"type": "DatasetReference",
 						"parameters": {
 							"container": "standard-raw",
-							"directory": "medium"
+							"dir": "medium",
+							"file": "medium_blob_2021-10-23.json"
 						}
 					}
 				],
 				"outputs": [
 					{
-						"referenceName": "ds_Json_file_endpoint_generic_file_name",
+						"referenceName": "ds_csv_file_endpoint_generic_filename",
 						"type": "DatasetReference",
 						"parameters": {
 							"container": "standard-stage",
-							"directory": "medium"
+							"dir": "medium",
+							"file": "@concat('medium_blob_',formatDateTime(utcnow(), 'yyyy-MM-dd'),'.csv')"
 						}
 					}
 				]

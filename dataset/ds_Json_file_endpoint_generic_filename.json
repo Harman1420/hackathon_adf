@@ -1,0 +1,77 @@
+{
+	"name": "ds_Json_file_endpoint_generic_filename",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_Json_lw_blob",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"container": {
+				"type": "string"
+			},
+			"dir": {
+				"type": "string"
+			},
+			"file": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": {
+					"value": "@dataset().file",
+					"type": "Expression"
+				},
+				"folderPath": {
+					"value": "@dataset().dir",
+					"type": "Expression"
+				},
+				"container": {
+					"value": "@dataset().container",
+					"type": "Expression"
+				}
+			}
+		},
+		"schema": {
+			"type": "object",
+			"properties": {
+				"creator": {
+					"type": "string"
+				},
+				"title": {
+					"type": "string"
+				},
+				"link": {
+					"type": "string"
+				},
+				"pubDate": {
+					"type": "string"
+				},
+				"content:encoded": {
+					"type": "string"
+				},
+				"content:encodedSnippet": {
+					"type": "string"
+				},
+				"dc:creator": {
+					"type": "string"
+				},
+				"guid": {
+					"type": "string"
+				},
+				"categories": {
+					"type": "array",
+					"items": {
+						"type": "string"
+					}
+				},
+				"isoDate": {
+					"type": "string"
+				}
+			}
+		}
+	}
+}

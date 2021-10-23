@@ -16,26 +16,39 @@
 				"userProperties": [],
 				"typeProperties": {
 					"source": {
-						"type": "JsonSource",
+						"type": "DelimitedTextSource",
 						"storeSettings": {
 							"type": "AzureBlobStorageReadSettings",
 							"recursive": true,
 							"enablePartitionDiscovery": false
 						},
 						"formatSettings": {
-							"type": "JsonReadSettings"
+							"type": "DelimitedTextReadSettings"
+						}
+					},
+					"sink": {
+						"type": "SnowflakeSink",
+						"importSettings": {
+							"type": "SnowflakeImportCopyCommand"
 						}
 					},
 					"enableStaging": false
 				},
 				"inputs": [
 					{
-						"referenceName": "ds_Json_file_endpoint_generic_file_name",
+						"referenceName": "ds_csv_file_endpoint_generic_filename",
 						"type": "DatasetReference",
 						"parameters": {
 							"container": "standard-stage",
-							"directory": "medium"
+							"dir": "medium",
+							"file": "medium_blob_2021-10-23.csv"
 						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "ds_snowflake_endpoint",
+						"type": "DatasetReference"
 					}
 				]
 			}

@@ -1,0 +1,16 @@
+{
+	"name": "ds_snowflake_endpoint",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_lw_snowflake",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SnowflakeTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "INFORMATION_SCHEMA",
+			"table": "TABLES"
+		}
+	}
+}

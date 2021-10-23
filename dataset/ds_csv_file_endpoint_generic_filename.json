@@ -1,0 +1,73 @@
+{
+	"name": "ds_csv_file_endpoint_generic_filename",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_csv_lw_blob",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"container": {
+				"type": "string"
+			},
+			"dir": {
+				"type": "string"
+			},
+			"file": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": {
+					"value": "@dataset().file",
+					"type": "Expression"
+				},
+				"folderPath": {
+					"value": "@dataset().dir",
+					"type": "Expression"
+				},
+				"container": {
+					"value": "@dataset().container",
+					"type": "Expression"
+				}
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "creator",
+				"type": "String"
+			},
+			{
+				"name": "title",
+				"type": "String"
+			},
+			{
+				"name": "link",
+				"type": "String"
+			},
+			{
+				"name": "pubDate",
+				"type": "String"
+			},
+			{
+				"name": "categories",
+				"type": "String"
+			},
+			{
+				"name": "dc:creator",
+				"type": "String"
+			},
+			{
+				"name": "isoDate",
+				"type": "String"
+			}
+		]
+	}
+}
