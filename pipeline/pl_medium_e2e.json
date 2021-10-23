@@ -28,6 +28,10 @@
 				],
 				"userProperties": [],
 				"typeProperties": {
+					"pipeline": {
+						"referenceName": "pl_raw_to_stage",
+						"type": "PipelineReference"
+					},
 					"waitOnCompletion": true
 				}
 			},
@@ -44,7 +48,14 @@
 				],
 				"userProperties": [],
 				"typeProperties": {
-					"waitOnCompletion": true
+					"pipeline": {
+						"referenceName": "stage_sf",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true,
+					"parameters": {
+						"query": "copy into \"CUSTOMER_DEV_RAW\".\"MEDIUM\".\"T_MEDIUM_BLOG\"\n  from @CUSTOMER_DEV_RAW.MEDIUM.stg_lw_std\nfile_format = (type = csv field_optionally_enclosed_by='\"' skip_header = 1)\npattern='medium/abcd.csv'\non_error = 'skip_file';"
+					}
 				}
 			},
 			{
@@ -60,7 +71,15 @@
 				],
 				"userProperties": [],
 				"typeProperties": {
-					"waitOnCompletion": true
+					"pipeline": {
+						"referenceName": "archive",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true,
+					"parameters": {
+						"container": "\"\"",
+						"dir": "medium"
+					}
 				}
 			}
 		],

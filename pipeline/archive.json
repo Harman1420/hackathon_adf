@@ -1,0 +1,116 @@
+{
+	"name": "archive",
+	"properties": {
+		"activities": [
+			{
+				"name": "Delete1",
+				"type": "Delete",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataset": {
+						"referenceName": "generic_binary_dir",
+						"type": "DatasetReference",
+						"parameters": {
+							"container": "archive-raw",
+							"dir": {
+								"value": "@pipeline().parameters.dir",
+								"type": "Expression"
+							}
+						}
+					},
+					"enableLogging": true,
+					"storeSettings": {
+						"type": "AzureBlobStorageReadSettings",
+						"recursive": true,
+						"enablePartitionDiscovery": false
+					}
+				}
+			},
+			{
+				"name": "Copy data1",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "Delete1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "BinarySource",
+						"storeSettings": {
+							"type": "AzureBlobStorageReadSettings",
+							"recursive": true
+						},
+						"formatSettings": {
+							"type": "BinaryReadSettings"
+						}
+					},
+					"sink": {
+						"type": "BinarySink",
+						"storeSettings": {
+							"type": "AzureBlobStorageWriteSettings"
+						}
+					},
+					"enableStaging": false
+				},
+				"inputs": [
+					{
+						"referenceName": "generic_binary_dir",
+						"type": "DatasetReference",
+						"parameters": {
+							"container": "standard-raw",
+							"dir": {
+								"value": "@pipeline().parameters.dir",
+								"type": "Expression"
+							}
+						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "generic_binary_dir",
+						"type": "DatasetReference",
+						"parameters": {
+							"container": "standard-stage",
+							"dir": {
+								"value": "@pipeline().parameters.dir",
+								"type": "Expression"
+							}
+						}
+					}
+				]
+			}
+		],
+		"parameters": {
+			"container": {
+				"type": "string"
+			},
+			"dir": {
+				"type": "string"
+			}
+		},
+		"folder": {
+			"name": "Common Activity"
+		},
+		"annotations": []
+	}
+}
