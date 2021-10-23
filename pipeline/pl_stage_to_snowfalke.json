@@ -15,8 +15,29 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
+					"source": {
+						"type": "JsonSource",
+						"storeSettings": {
+							"type": "AzureBlobStorageReadSettings",
+							"recursive": true,
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "JsonReadSettings"
+						}
+					},
 					"enableStaging": false
-				}
+				},
+				"inputs": [
+					{
+						"referenceName": "ds_Json_file_endpoint_generic_file_name",
+						"type": "DatasetReference",
+						"parameters": {
+							"container": "standard-stage",
+							"directory": "medium"
+						}
+					}
+				]
 			}
 		],
 		"folder": {
