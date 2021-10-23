@@ -19,7 +19,10 @@
 						"type": "RestSource",
 						"httpRequestTimeout": "00:01:40",
 						"requestInterval": "00.00:00:00.010",
-						"requestMethod": "GET"
+						"requestMethod": "GET",
+						"additionalHeaders": {
+							"Authorization": "Bearer 220aa0d06f283c04324b38b75378f39176a15afc67e38eeb7cbf166249da19fd7"
+						}
 					},
 					"sink": {
 						"type": "JsonSink",
@@ -49,7 +52,7 @@
 							"container": "standard-raw",
 							"directory": "medium",
 							"file name": {
-								"value": "@concat('medium_blog_',formatDateTime(utcnow(), 'yyyy-MM-dd'),'.json')",
+								"value": "@concat('medium_blog_',formatDateTime(utcnow(), 'yyyy-MM-dd'))",
 								"type": "Expression"
 							}
 						}

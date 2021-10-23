@@ -1,0 +1,56 @@
+{
+	"name": "Json1",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureBlobStorage1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "medium blog data.json",
+				"container": "standard-raw"
+			}
+		},
+		"schema": {
+			"type": "object",
+			"properties": {
+				"creator": {
+					"type": "string"
+				},
+				"title": {
+					"type": "string"
+				},
+				"link": {
+					"type": "string"
+				},
+				"pubDate": {
+					"type": "string"
+				},
+				"content:encoded": {
+					"type": "string"
+				},
+				"content:encodedSnippet": {
+					"type": "string"
+				},
+				"dc:creator": {
+					"type": "string"
+				},
+				"guid": {
+					"type": "string"
+				},
+				"categories": {
+					"type": "array",
+					"items": {
+						"type": "string"
+					}
+				},
+				"isoDate": {
+					"type": "string"
+				}
+			}
+		}
+	}
+}
