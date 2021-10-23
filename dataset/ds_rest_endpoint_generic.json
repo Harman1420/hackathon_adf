@@ -1,0 +1,12 @@
+{
+	"name": "ds_rest_endpoint_generic",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_lw_rest_endpoint",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "RestResource",
+		"schema": []
+	}
+}
