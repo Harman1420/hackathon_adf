@@ -2,7 +2,7 @@
 	"name": "ds_csv_file_endpoint_generic",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "ls_lw_AzureBlobStorage_endpoint",
+			"referenceName": "ls_lw_blob",
 			"type": "LinkedServiceReference"
 		},
 		"parameters": {
