@@ -1,5 +1,5 @@
 {
-	"name": "pl_github_e2e",
+	"name": "pl_trending_tech_e2e_copy1",
 	"properties": {
 		"activities": [
 			{
@@ -9,7 +9,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"pipeline": {
-						"referenceName": "pl_e2e_github_issue_repos",
+						"referenceName": "pl_e2e_medium_user_ingestion",
 						"type": "PipelineReference"
 					},
 					"waitOnCompletion": true
@@ -35,7 +35,7 @@
 					"waitOnCompletion": true,
 					"parameters": {
 						"file": "\"\"",
-						"dir": "github"
+						"dir": "medium_user"
 					}
 				}
 			},
@@ -58,7 +58,7 @@
 					},
 					"waitOnCompletion": true,
 					"parameters": {
-						"query": "copy into \"CUSTOMER_DEV_RAW\".\"GIT_HUB\".\"GITHUB_REPO_ISSUE\"\n  from @CUSTOMER_DEV_RAW.GIT_HUB.stg_lw_std\nfile_format = (type = csv field_optionally_enclosed_by='\"' skip_header = 1)\npattern='github/*.csv'\non_error = 'skip_file';"
+						"query": "copy into \"CUSTOMER_DEV_RAW\".\"MEDIUM\".\"T_MEDIUM_BLOG\"\n  from @CUSTOMER_DEV_RAW.MEDIUM.stg_lw_std\nfile_format = (type = csv field_optionally_enclosed_by='\"' skip_header = 1)\npattern='medium/abcd.csv'\non_error = 'skip_file';"
 					}
 				}
 			},
@@ -82,7 +82,7 @@
 					"waitOnCompletion": true,
 					"parameters": {
 						"container": "\"\"",
-						"dir": "github"
+						"dir": "medium_user"
 					}
 				}
 			}
