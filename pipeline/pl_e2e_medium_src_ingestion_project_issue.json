@@ -52,7 +52,7 @@
 							"container": "standard-raw",
 							"dir": "gitlab",
 							"file": {
-								"value": "@concat('projrct_issue_',formatDateTime(utcnow(), 'yyyy-MM-dd'),'.json')",
+								"value": "@concat('project_issue_',formatDateTime(utcnow(), 'yyyy-MM-dd'),'.json')",
 								"type": "Expression"
 							}
 						}

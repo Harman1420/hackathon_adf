@@ -1,0 +1,1039 @@
+{
+	"name": "pl_raw_to_stage_project_gitlab",
+	"properties": {
+		"activities": [
+			{
+				"name": "ac_raw_to_stage_medium",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "JsonSource",
+						"storeSettings": {
+							"type": "AzureBlobStorageReadSettings",
+							"recursive": true,
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "JsonReadSettings"
+						}
+					},
+					"sink": {
+						"type": "DelimitedTextSink",
+						"storeSettings": {
+							"type": "AzureBlobStorageWriteSettings",
+							"copyBehavior": "FlattenHierarchy"
+						},
+						"formatSettings": {
+							"type": "DelimitedTextWriteSettings",
+							"quoteAllText": true,
+							"fileExtension": ".txt"
+						}
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"path": "$['id']"
+								},
+								"sink": {
+									"name": "id",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['description']"
+								},
+								"sink": {
+									"name": "description",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['name']"
+								},
+								"sink": {
+									"name": "name",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['name_with_namespace']"
+								},
+								"sink": {
+									"name": "name_with_namespace",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['path']"
+								},
+								"sink": {
+									"name": "path",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['path_with_namespace']"
+								},
+								"sink": {
+									"name": "path_with_namespace",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['created_at']"
+								},
+								"sink": {
+									"name": "created_at",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['default_branch']"
+								},
+								"sink": {
+									"name": "default_branch",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['ssh_url_to_repo']"
+								},
+								"sink": {
+									"name": "ssh_url_to_repo",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['http_url_to_repo']"
+								},
+								"sink": {
+									"name": "http_url_to_repo",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['web_url']"
+								},
+								"sink": {
+									"name": "web_url",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['readme_url']"
+								},
+								"sink": {
+									"name": "readme_url",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['avatar_url']"
+								},
+								"sink": {
+									"name": "avatar_url",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['forks_count']"
+								},
+								"sink": {
+									"name": "forks_count",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['star_count']"
+								},
+								"sink": {
+									"name": "star_count",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['last_activity_at']"
+								},
+								"sink": {
+									"name": "last_activity_at",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['namespace']['id']"
+								},
+								"sink": {
+									"name": "namespace_id",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['namespace']['name']"
+								},
+								"sink": {
+									"name": "namespace_name",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['namespace']['path']"
+								},
+								"sink": {
+									"name": "namespace_path",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['namespace']['kind']"
+								},
+								"sink": {
+									"name": "kind",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['namespace']['full_path']"
+								},
+								"sink": {
+									"name": "full_path",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['namespace']['parent_id']"
+								},
+								"sink": {
+									"name": "parent_id",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['namespace']['avatar_url']"
+								},
+								"sink": {
+									"name": "namespace_avatar_url",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['namespace']['web_url']"
+								},
+								"sink": {
+									"name": "namespace_web_url",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['container_registry_image_prefix']"
+								},
+								"sink": {
+									"name": "container_registry_image_prefix",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['_links']['self']"
+								},
+								"sink": {
+									"name": "self",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['_links']['issues']"
+								},
+								"sink": {
+									"name": "issues",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['_links']['merge_requests']"
+								},
+								"sink": {
+									"name": "merge_requests",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['_links']['repo_branches']"
+								},
+								"sink": {
+									"name": "repo_branches",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['_links']['labels']"
+								},
+								"sink": {
+									"name": "labels",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['_links']['events']"
+								},
+								"sink": {
+									"name": "events",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['_links']['members']"
+								},
+								"sink": {
+									"name": "members",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['packages_enabled']"
+								},
+								"sink": {
+									"name": "packages_enabled",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['empty_repo']"
+								},
+								"sink": {
+									"name": "empty_repo",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['archived']"
+								},
+								"sink": {
+									"name": "archived",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['visibility']"
+								},
+								"sink": {
+									"name": "visibility",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['owner']['id']"
+								},
+								"sink": {
+									"name": "owner_id",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['owner']['name']"
+								},
+								"sink": {
+									"name": "owner_name",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['owner']['username']"
+								},
+								"sink": {
+									"name": "username",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['owner']['state']"
+								},
+								"sink": {
+									"name": "state",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['owner']['avatar_url']"
+								},
+								"sink": {
+									"name": "owner_avatar_url",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['owner']['web_url']"
+								},
+								"sink": {
+									"name": "owner_web_url",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['resolve_outdated_diff_discussions']"
+								},
+								"sink": {
+									"name": "resolve_outdated_diff_discussions",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['container_expiration_policy']['cadence']"
+								},
+								"sink": {
+									"name": "cadence",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['container_expiration_policy']['enabled']"
+								},
+								"sink": {
+									"name": "enabled",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['container_expiration_policy']['keep_n']"
+								},
+								"sink": {
+									"name": "keep_n",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['container_expiration_policy']['older_than']"
+								},
+								"sink": {
+									"name": "older_than",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['container_expiration_policy']['name_regex']"
+								},
+								"sink": {
+									"name": "name_regex",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['container_expiration_policy']['name_regex_keep']"
+								},
+								"sink": {
+									"name": "name_regex_keep",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['container_expiration_policy']['next_run_at']"
+								},
+								"sink": {
+									"name": "next_run_at",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['issues_enabled']"
+								},
+								"sink": {
+									"name": "issues_enabled",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['merge_requests_enabled']"
+								},
+								"sink": {
+									"name": "merge_requests_enabled",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['wiki_enabled']"
+								},
+								"sink": {
+									"name": "wiki_enabled",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['jobs_enabled']"
+								},
+								"sink": {
+									"name": "jobs_enabled",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['snippets_enabled']"
+								},
+								"sink": {
+									"name": "snippets_enabled",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['container_registry_enabled']"
+								},
+								"sink": {
+									"name": "container_registry_enabled",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['service_desk_enabled']"
+								},
+								"sink": {
+									"name": "service_desk_enabled",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['service_desk_address']"
+								},
+								"sink": {
+									"name": "service_desk_address",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['can_create_merge_request_in']"
+								},
+								"sink": {
+									"name": "can_create_merge_request_in",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['issues_access_level']"
+								},
+								"sink": {
+									"name": "issues_access_level",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['repository_access_level']"
+								},
+								"sink": {
+									"name": "repository_access_level",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['merge_requests_access_level']"
+								},
+								"sink": {
+									"name": "merge_requests_access_level",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['forking_access_level']"
+								},
+								"sink": {
+									"name": "forking_access_level",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['wiki_access_level']"
+								},
+								"sink": {
+									"name": "wiki_access_level",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['builds_access_level']"
+								},
+								"sink": {
+									"name": "builds_access_level",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['snippets_access_level']"
+								},
+								"sink": {
+									"name": "snippets_access_level",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['pages_access_level']"
+								},
+								"sink": {
+									"name": "pages_access_level",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['operations_access_level']"
+								},
+								"sink": {
+									"name": "operations_access_level",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['analytics_access_level']"
+								},
+								"sink": {
+									"name": "analytics_access_level",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['container_registry_access_level']"
+								},
+								"sink": {
+									"name": "container_registry_access_level",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['emails_disabled']"
+								},
+								"sink": {
+									"name": "emails_disabled",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['shared_runners_enabled']"
+								},
+								"sink": {
+									"name": "shared_runners_enabled",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['lfs_enabled']"
+								},
+								"sink": {
+									"name": "lfs_enabled",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['creator_id']"
+								},
+								"sink": {
+									"name": "creator_id",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['import_status']"
+								},
+								"sink": {
+									"name": "import_status",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['import_error']"
+								},
+								"sink": {
+									"name": "import_error",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['open_issues_count']"
+								},
+								"sink": {
+									"name": "open_issues_count",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['runners_token']"
+								},
+								"sink": {
+									"name": "runners_token",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['ci_default_git_depth']"
+								},
+								"sink": {
+									"name": "ci_default_git_depth",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['ci_forward_deployment_enabled']"
+								},
+								"sink": {
+									"name": "ci_forward_deployment_enabled",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['ci_job_token_scope_enabled']"
+								},
+								"sink": {
+									"name": "ci_job_token_scope_enabled",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['public_jobs']"
+								},
+								"sink": {
+									"name": "public_jobs",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['build_git_strategy']"
+								},
+								"sink": {
+									"name": "build_git_strategy",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['build_timeout']"
+								},
+								"sink": {
+									"name": "build_timeout"
+								}
+							},
+							{
+								"source": {
+									"path": "$['auto_cancel_pending_pipelines']"
+								},
+								"sink": {
+									"name": "auto_cancel_pending_pipelines",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['build_coverage_regex']"
+								},
+								"sink": {
+									"name": "build_coverage_regex",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['ci_config_path']"
+								},
+								"sink": {
+									"name": "ci_config_path",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['only_allow_merge_if_pipeline_succeeds']"
+								},
+								"sink": {
+									"name": "only_allow_merge_if_pipeline_succeeds",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['allow_merge_on_skipped_pipeline']"
+								},
+								"sink": {
+									"name": "allow_merge_on_skipped_pipeline",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['restrict_user_defined_variables']"
+								},
+								"sink": {
+									"name": "restrict_user_defined_variables",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['request_access_enabled']"
+								},
+								"sink": {
+									"name": "request_access_enabled",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['only_allow_merge_if_all_discussions_are_resolved']"
+								},
+								"sink": {
+									"name": "only_allow_merge_if_all_discussions_are_resolved",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['remove_source_branch_after_merge']"
+								},
+								"sink": {
+									"name": "remove_source_branch_after_merge",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['printing_merge_request_link_enabled']"
+								},
+								"sink": {
+									"name": "printing_merge_request_link_enabled",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['merge_method']"
+								},
+								"sink": {
+									"name": "merge_method",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['squash_option']"
+								},
+								"sink": {
+									"name": "squash_option",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['suggestion_commit_message']"
+								},
+								"sink": {
+									"name": "suggestion_commit_message",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['auto_devops_enabled']"
+								},
+								"sink": {
+									"name": "auto_devops_enabled",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['auto_devops_deploy_strategy']"
+								},
+								"sink": {
+									"name": "auto_devops_deploy_strategy",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['autoclose_referenced_issues']"
+								},
+								"sink": {
+									"name": "autoclose_referenced_issues"
+								}
+							},
+							{
+								"source": {
+									"path": "$['keep_latest_artifact']"
+								},
+								"sink": {
+									"name": "keep_latest_artifact",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['external_authorization_classification_label']"
+								},
+								"sink": {
+									"name": "external_authorization_classification_label",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['requirements_enabled']"
+								},
+								"sink": {
+									"name": "requirements_enabled",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['security_and_compliance_enabled']"
+								},
+								"sink": {
+									"name": "security_and_compliance_enabled",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['permissions']['project_access']['access_level']"
+								},
+								"sink": {
+									"name": "access_level",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['permissions']['project_access']['notification_level']"
+								},
+								"sink": {
+									"name": "notification_level",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['permissions']['group_access']"
+								},
+								"sink": {
+									"name": "group_access",
+									"type": "String"
+								}
+							}
+						],
+						"collectionReference": "$['compliance_frameworks']"
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "ds_Json_file_endpoint_generic_filename",
+						"type": "DatasetReference",
+						"parameters": {
+							"container": "standard-raw",
+							"dir": "gitlab",
+							"file": "project_2021-10-23.json"
+						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "ds_csv_file_endpoint_generic_filename",
+						"type": "DatasetReference",
+						"parameters": {
+							"container": "standard-stage",
+							"dir": "gitlab",
+							"file": "@concat('project_',formatDateTime(utcnow(), 'yyyy-MM-dd'),'.csv')"
+						}
+					}
+				]
+			}
+		],
+		"folder": {
+			"name": "Common Activity"
+		},
+		"annotations": []
+	}
+}

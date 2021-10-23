@@ -1,9 +1,9 @@
 {
-	"name": "pl_e2e_medium_src_ingestion_repos",
+	"name": "pl_trending_tech",
 	"properties": {
 		"activities": [
 			{
-				"name": "ac_get_medium_src_blog_data_repos",
+				"name": "ac_get_blog_data_trending tech",
 				"type": "Copy",
 				"dependsOn": [],
 				"policy": {
@@ -17,12 +17,9 @@
 				"typeProperties": {
 					"source": {
 						"type": "RestSource",
-						"httpRequestTimeout": "00:01:40",
+						"httpRequestTimeout": "00:05:40",
 						"requestInterval": "00.00:00:00.010",
-						"requestMethod": "GET",
-						"additionalHeaders": {
-							"Authorization": "Bearer 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"
-						}
+						"requestMethod": "GET"
 					},
 					"sink": {
 						"type": "JsonSink",
@@ -37,10 +34,10 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "ds_rest_endpoint_user",
+						"referenceName": "ds_rest_endpoint_generic",
 						"type": "DatasetReference",
 						"parameters": {
-							"url": "https://api.github.com/repos/architpandita/dataStructure/issues"
+							"url": "http://b100-2401-4900-1c3c-882d-f8c7-4975-37be-e0cc.ngrok.io/run_ocr"
 						}
 					}
 				],
@@ -50,9 +47,9 @@
 						"type": "DatasetReference",
 						"parameters": {
 							"container": "standard-raw",
-							"dir": "github",
+							"dir": "trending tech",
 							"file": {
-								"value": "@concat('github_repos_',formatDateTime(utcnow(), 'yyyy-MM-dd'),'.json')",
+								"value": "@concat('trending_tech_',formatDateTime(utcnow(), 'yyyy-MM-dd'),'.json')",
 								"type": "Expression"
 							}
 						}

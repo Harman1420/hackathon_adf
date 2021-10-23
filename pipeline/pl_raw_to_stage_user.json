@@ -1,5 +1,5 @@
 {
-	"name": "pl_raw_to_stage",
+	"name": "pl_raw_to_stage_user",
 	"properties": {
 		"activities": [
 			{
@@ -44,78 +44,51 @@
 						"mappings": [
 							{
 								"source": {
-									"path": "$['creator']"
+									"path": "$['data'][0]['id']"
 								},
 								"sink": {
-									"name": "creator",
+									"name": "id",
 									"type": "String"
 								}
 							},
 							{
 								"source": {
-									"path": "$['title']"
+									"path": "$['data'][0]['name']"
 								},
 								"sink": {
-									"name": "title",
+									"name": "name",
 									"type": "String"
 								}
 							},
 							{
 								"source": {
-									"path": "$['link']"
+									"path": "$['data'][0]['description']"
 								},
 								"sink": {
-									"name": "link",
+									"name": "description",
 									"type": "String"
 								}
 							},
 							{
 								"source": {
-									"path": "$['pubDate']"
+									"path": "$['data'][0]['url']"
 								},
 								"sink": {
-									"name": "pubDate",
+									"name": "url",
 									"type": "String"
 								}
 							},
 							{
 								"source": {
-									"path": "$['dc:creator']"
+									"path": "$['data'][0]['imageUrl']"
 								},
 								"sink": {
-									"name": "dc:creator",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"path": "$['guid']"
-								},
-								"sink": {
-									"name": "guid",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"path": "$['categories']"
-								},
-								"sink": {
-									"name": "items",
-									"type": "Guid"
-								}
-							},
-							{
-								"source": {
-									"path": "$['isoDate']"
-								},
-								"sink": {
-									"name": "isoDate",
+									"name": "imageUrl",
 									"type": "String"
 								}
 							}
 						],
-						"collectionReference": ""
+						"collectionReference": "$['categories']"
 					}
 				},
 				"inputs": [
@@ -125,7 +98,7 @@
 						"parameters": {
 							"container": "standard-raw",
 							"dir": "medium",
-							"file": "medium blog data updated.json"
+							"file": "user_2021-10-23.json"
 						}
 					}
 				],
@@ -136,7 +109,7 @@
 						"parameters": {
 							"container": "standard-stage",
 							"dir": "medium",
-							"file": "@concat('temp',formatDateTime(utcnow(), 'yyyy-MM-dd'),'.csv')"
+							"file": "@concat('user_',formatDateTime(utcnow(), 'yyyy-MM-dd'),'.csv')"
 						}
 					}
 				]

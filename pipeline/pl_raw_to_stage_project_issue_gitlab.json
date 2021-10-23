@@ -1,0 +1,683 @@
+{
+	"name": "pl_raw_to_stage_project_issue_gitlab",
+	"properties": {
+		"activities": [
+			{
+				"name": "ac_raw_to_stage_medium",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "JsonSource",
+						"storeSettings": {
+							"type": "AzureBlobStorageReadSettings",
+							"recursive": true,
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "JsonReadSettings"
+						}
+					},
+					"sink": {
+						"type": "DelimitedTextSink",
+						"storeSettings": {
+							"type": "AzureBlobStorageWriteSettings",
+							"copyBehavior": "FlattenHierarchy"
+						},
+						"formatSettings": {
+							"type": "DelimitedTextWriteSettings",
+							"quoteAllText": true,
+							"fileExtension": ".txt"
+						}
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"path": "$['id']"
+								},
+								"sink": {
+									"name": "id",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['iid']"
+								},
+								"sink": {
+									"name": "iid",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['project_id']"
+								},
+								"sink": {
+									"name": "project_id",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['title']"
+								},
+								"sink": {
+									"name": "title",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['description']"
+								},
+								"sink": {
+									"name": "description",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['state']"
+								},
+								"sink": {
+									"name": "state",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['created_at']"
+								},
+								"sink": {
+									"name": "created_at",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['updated_at']"
+								},
+								"sink": {
+									"name": "updated_at",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['closed_at']"
+								},
+								"sink": {
+									"name": "closed_at",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['closed_by']['id']"
+								},
+								"sink": {
+									"name": "closed_by_id",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['closed_by']['name']"
+								},
+								"sink": {
+									"name": "closed_by_name",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['closed_by']['username']"
+								},
+								"sink": {
+									"name": "closed_by_username",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['closed_by']['state']"
+								},
+								"sink": {
+									"name": "closed_by_state",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['closed_by']['avatar_url']"
+								},
+								"sink": {
+									"name": "closed_by_avatar_url",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['closed_by']['web_url']"
+								},
+								"sink": {
+									"name": "closed_by_web_url",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['labels']"
+								},
+								"sink": {
+									"name": "items",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['milestone']['id']"
+								},
+								"sink": {
+									"name": "milestone_id",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['milestone']['iid']"
+								},
+								"sink": {
+									"name": "milestone_iid",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['milestone']['project_id']"
+								},
+								"sink": {
+									"name": "milestone_project_id",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['milestone']['title']"
+								},
+								"sink": {
+									"name": "milestone_title",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['milestone']['description']"
+								},
+								"sink": {
+									"name": "milestone_description",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['milestone']['state']"
+								},
+								"sink": {
+									"name": "milestone_state"
+								}
+							},
+							{
+								"source": {
+									"path": "$['milestone']['created_at']"
+								},
+								"sink": {
+									"name": "milestone_created_at"
+								}
+							},
+							{
+								"source": {
+									"path": "$['milestone']['updated_at']"
+								},
+								"sink": {
+									"name": "milestone_updated_at"
+								}
+							},
+							{
+								"source": {
+									"path": "$['milestone']['due_date']"
+								},
+								"sink": {
+									"name": "milestone_due_date"
+								}
+							},
+							{
+								"source": {
+									"path": "$['milestone']['start_date']"
+								},
+								"sink": {
+									"name": "start_date"
+								}
+							},
+							{
+								"source": {
+									"path": "$['milestone']['expired']"
+								},
+								"sink": {
+									"name": "expired"
+								}
+							},
+							{
+								"source": {
+									"path": "$['milestone']['web_url']"
+								},
+								"sink": {
+									"name": "milestone_web_url"
+								}
+							},
+							{
+								"source": {
+									"path": "$['assignees'][0]['id']"
+								},
+								"sink": {
+									"name": "assignees'][0]['id"
+								}
+							},
+							{
+								"source": {
+									"path": "$['assignees'][0]['name']"
+								},
+								"sink": {
+									"name": "assignees'][0]['name"
+								}
+							},
+							{
+								"source": {
+									"path": "$['assignees'][0]['username']"
+								},
+								"sink": {
+									"name": "assignees'][0]['username"
+								}
+							},
+							{
+								"source": {
+									"path": "$['assignees'][0]['state']"
+								},
+								"sink": {
+									"name": "assignees'][0]['state"
+								}
+							},
+							{
+								"source": {
+									"path": "$['assignees'][0]['avatar_url']"
+								},
+								"sink": {
+									"name": "assignees'][0]['avatar_url"
+								}
+							},
+							{
+								"source": {
+									"path": "$['assignees'][0]['web_url']"
+								},
+								"sink": {
+									"name": "assignees'][0]['web_url"
+								}
+							},
+							{
+								"source": {
+									"path": "$['author']['id']"
+								},
+								"sink": {
+									"name": "author_id"
+								}
+							},
+							{
+								"source": {
+									"path": "$['author']['name']"
+								},
+								"sink": {
+									"name": "author_name"
+								}
+							},
+							{
+								"source": {
+									"path": "$['author']['username']"
+								},
+								"sink": {
+									"name": "author_username"
+								}
+							},
+							{
+								"source": {
+									"path": "$['author']['state']"
+								},
+								"sink": {
+									"name": "author_state"
+								}
+							},
+							{
+								"source": {
+									"path": "$['author']['avatar_url']"
+								},
+								"sink": {
+									"name": "author_avatar_url"
+								}
+							},
+							{
+								"source": {
+									"path": "$['author']['web_url']"
+								},
+								"sink": {
+									"name": "author_web_url"
+								}
+							},
+							{
+								"source": {
+									"path": "$['type']"
+								},
+								"sink": {
+									"name": "type"
+								}
+							},
+							{
+								"source": {
+									"path": "$['assignee']['id']"
+								},
+								"sink": {
+									"name": "assignee_id"
+								}
+							},
+							{
+								"source": {
+									"path": "$['assignee']['name']"
+								},
+								"sink": {
+									"name": "assignee_name"
+								}
+							},
+							{
+								"source": {
+									"path": "$['assignee']['username']"
+								},
+								"sink": {
+									"name": "assignee_username"
+								}
+							},
+							{
+								"source": {
+									"path": "$['assignee']['state']"
+								},
+								"sink": {
+									"name": "assignee_state"
+								}
+							},
+							{
+								"source": {
+									"path": "$['assignee']['avatar_url']"
+								},
+								"sink": {
+									"name": "assignee_avatar_url"
+								}
+							},
+							{
+								"source": {
+									"path": "$['assignee']['web_url']"
+								},
+								"sink": {
+									"name": "assignee_web_url"
+								}
+							},
+							{
+								"source": {
+									"path": "$['user_notes_count']"
+								},
+								"sink": {
+									"name": "user_notes_count"
+								}
+							},
+							{
+								"source": {
+									"path": "$['merge_requests_count']"
+								},
+								"sink": {
+									"name": "merge_requests_count"
+								}
+							},
+							{
+								"source": {
+									"path": "$['upvotes']"
+								},
+								"sink": {
+									"name": "upvotes"
+								}
+							},
+							{
+								"source": {
+									"path": "$['downvotes']"
+								},
+								"sink": {
+									"name": "downvotes"
+								}
+							},
+							{
+								"source": {
+									"path": "$['due_date']"
+								},
+								"sink": {
+									"name": "due_date"
+								}
+							},
+							{
+								"source": {
+									"path": "$['confidential']"
+								},
+								"sink": {
+									"name": "confidential"
+								}
+							},
+							{
+								"source": {
+									"path": "$['discussion_locked']"
+								},
+								"sink": {
+									"name": "discussion_locked"
+								}
+							},
+							{
+								"source": {
+									"path": "$['issue_type']"
+								},
+								"sink": {
+									"name": "issue_type"
+								}
+							},
+							{
+								"source": {
+									"path": "$['web_url']"
+								},
+								"sink": {
+									"name": "web_url"
+								}
+							},
+							{
+								"source": {
+									"path": "$['time_stats']['time_estimate']"
+								},
+								"sink": {
+									"name": "time_estimate"
+								}
+							},
+							{
+								"source": {
+									"path": "$['time_stats']['total_time_spent']"
+								},
+								"sink": {
+									"name": "total_time_spent"
+								}
+							},
+							{
+								"source": {
+									"path": "$['time_stats']['human_time_estimate']"
+								},
+								"sink": {
+									"name": "human_time_estimate"
+								}
+							},
+							{
+								"source": {
+									"path": "$['time_stats']['human_total_time_spent']"
+								},
+								"sink": {
+									"name": "human_total_time_spent"
+								}
+							},
+							{
+								"source": {
+									"path": "$['task_completion_status']['count']"
+								},
+								"sink": {
+									"name": "count"
+								}
+							},
+							{
+								"source": {
+									"path": "$['task_completion_status']['completed_count']"
+								},
+								"sink": {
+									"name": "completed_count"
+								}
+							},
+							{
+								"source": {
+									"path": "$['blocking_issues_count']"
+								},
+								"sink": {
+									"name": "blocking_issues_count"
+								}
+							},
+							{
+								"source": {
+									"path": "$['has_tasks']"
+								},
+								"sink": {
+									"name": "has_tasks"
+								}
+							},
+							{
+								"source": {
+									"path": "$['_links']['self']"
+								},
+								"sink": {
+									"name": "self"
+								}
+							},
+							{
+								"source": {
+									"path": "$['_links']['notes']"
+								},
+								"sink": {
+									"name": "notes"
+								}
+							},
+							{
+								"source": {
+									"path": "$['_links']['award_emoji']"
+								},
+								"sink": {
+									"name": "award_emoji"
+								}
+							},
+							{
+								"source": {
+									"path": "$['_links']['project']"
+								},
+								"sink": {
+									"name": "project"
+								}
+							},
+							{
+								"source": {
+									"path": "$['references']['short']"
+								},
+								"sink": {
+									"name": "short"
+								}
+							},
+							{
+								"source": {
+									"path": "$['references']['relative']"
+								},
+								"sink": {
+									"name": "relative"
+								}
+							},
+							{
+								"source": {
+									"path": "$['references']['full']"
+								},
+								"sink": {
+									"name": "full"
+								}
+							},
+							{
+								"source": {
+									"path": "$['moved_to_id']"
+								},
+								"sink": {
+									"name": "moved_to_id"
+								}
+							},
+							{
+								"source": {
+									"path": "$['service_desk_reply_to']"
+								},
+								"sink": {
+									"name": "service_desk_reply_to"
+								}
+							}
+						],
+						"collectionReference": "$['categories']"
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "ds_Json_file_endpoint_generic_filename",
+						"type": "DatasetReference",
+						"parameters": {
+							"container": "standard-raw",
+							"dir": "gitlab",
+							"file": "project_issue_2021-10-23.json"
+						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "ds_csv_file_endpoint_generic_filename",
+						"type": "DatasetReference",
+						"parameters": {
+							"container": "standard-stage",
+							"dir": "medium",
+							"file": "@concat('project_issue_',formatDateTime(utcnow(), 'yyyy-MM-dd'),'.csv')"
+						}
+					}
+				]
+			}
+		],
+		"folder": {
+			"name": "Common Activity"
+		},
+		"annotations": []
+	}
+}
