@@ -1,9 +1,9 @@
 {
-	"name": "pipeline1",
+	"name": "pl_e2e_medium_src_ingestion",
 	"properties": {
 		"activities": [
 			{
-				"name": "Copy data1",
+				"name": "ac_get_medium_blog_data",
 				"type": "Copy",
 				"dependsOn": [],
 				"policy": {
@@ -15,8 +15,46 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
+					"source": {
+						"type": "RestSource",
+						"httpRequestTimeout": "00:01:40",
+						"requestInterval": "00.00:00:00.010",
+						"requestMethod": "GET"
+					},
+					"sink": {
+						"type": "JsonSink",
+						"storeSettings": {
+							"type": "AzureBlobStorageWriteSettings"
+						},
+						"formatSettings": {
+							"type": "JsonWriteSettings"
+						}
+					},
 					"enableStaging": false
-				}
+				},
+				"inputs": [
+					{
+						"referenceName": "ds_rest_endpoint_generic",
+						"type": "DatasetReference",
+						"parameters": {
+							"url": "https://v1.nocodeapi.com/architpandita/medium/RqhaGIRBEdJliLwj"
+						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "ds_Json_file_endpoint_generic_file_name",
+						"type": "DatasetReference",
+						"parameters": {
+							"container": "standard-raw",
+							"directory": "medium",
+							"file name": {
+								"value": "@concat('medium_blog_',formatDateTime(utcnow(), 'yyyy-MM-dd'))",
+								"type": "Expression"
+							}
+						}
+					}
+				]
 			}
 		],
 		"annotations": []

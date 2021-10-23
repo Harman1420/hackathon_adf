@@ -1,5 +1,5 @@
 {
-	"name": "ds_Json_file_endpoint_generic",
+	"name": "ds_Json_file_endpoint_generic_file_name",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "ls_lw_AzureBlobStorage_endpoint",
@@ -8,6 +8,12 @@
 		"parameters": {
 			"container": {
 				"type": "string"
+			},
+			"directory": {
+				"type": "string"
+			},
+			"file name": {
+				"type": "string"
 			}
 		},
 		"annotations": [],
@@ -15,6 +21,14 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
+				"fileName": {
+					"value": "@dataset().file name",
+					"type": "Expression"
+				},
+				"folderPath": {
+					"value": "@dataset().directory",
+					"type": "Expression"
+				},
 				"container": {
 					"value": "@dataset().container",
 					"type": "Expression"

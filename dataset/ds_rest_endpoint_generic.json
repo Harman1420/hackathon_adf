@@ -3,7 +3,19 @@
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "ls_lw_rest_endpoint",
-			"type": "LinkedServiceReference"
+			"type": "LinkedServiceReference",
+			"parameters": {
+				"url": {
+					"value": "@dataset().url",
+					"type": "Expression"
+				},
+				"key": "''"
+			}
+		},
+		"parameters": {
+			"url": {
+				"type": "string"
+			}
 		},
 		"annotations": [],
 		"type": "RestResource",

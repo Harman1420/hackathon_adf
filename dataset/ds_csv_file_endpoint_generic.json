@@ -1,5 +1,5 @@
 {
-	"name": "ds_csv_file_endpoint_generic_file_name",
+	"name": "ds_csv_file_endpoint_generic",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "ls_lw_AzureBlobStorage_endpoint",
@@ -11,9 +11,6 @@
 			},
 			"directory": {
 				"type": "string"
-			},
-			"file name": {
-				"type": "string"
 			}
 		},
 		"annotations": [],
@@ -21,10 +18,6 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"fileName": {
-					"value": "@dataset().file name",
-					"type": "Expression"
-				},
 				"folderPath": {
 					"value": "@dataset().directory",
 					"type": "Expression"
