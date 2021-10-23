@@ -1,0 +1,15 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "df-lw-hackothon-dev"
+		},
+		"ls_lw_AzureBlobStorage_endpoint_connectionString": {
+			"value": ""
+		},
+		"ls_lw_rest_endpoint_properties_typeProperties_url": {
+			"value": "@{linkedService().url}"
+		}
+	}
+}
