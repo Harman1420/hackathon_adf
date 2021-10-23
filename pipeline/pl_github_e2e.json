@@ -32,7 +32,11 @@
 						"referenceName": "pl_raw_to_stage",
 						"type": "PipelineReference"
 					},
-					"waitOnCompletion": true
+					"waitOnCompletion": true,
+					"parameters": {
+						"file": "\"\"",
+						"dir": "github"
+					}
 				}
 			},
 			{
@@ -54,7 +58,7 @@
 					},
 					"waitOnCompletion": true,
 					"parameters": {
-						"query": "copy into \"CUSTOMER_DEV_RAW\".\"MEDIUM\".\"T_MEDIUM_BLOG\"\n  from @CUSTOMER_DEV_RAW.MEDIUM.stg_lw_std\nfile_format = (type = csv field_optionally_enclosed_by='\"' skip_header = 1)\npattern='medium/abcd.csv'\non_error = 'skip_file';"
+						"query": "copy into \"CUSTOMER_DEV_RAW\".\"GIT_HUB\".\"GITHUB_REPO\"\n  from @stg_lw_std\nfile_format = (type = csv field_optionally_enclosed_by='\"' skip_header = 1)\npattern='github/.csv'\non_error = 'skip_file';"
 					}
 				}
 			},
@@ -78,7 +82,7 @@
 					"waitOnCompletion": true,
 					"parameters": {
 						"container": "\"\"",
-						"dir": "medium"
+						"dir": "github"
 					}
 				}
 			}

@@ -3,8 +3,8 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "ac_raw_to_stage_medium",
-				"type": "Copy",
+				"name": "Get Metadata1",
+				"type": "GetMetadata",
 				"dependsOn": [],
 				"policy": {
 					"timeout": "7.00:00:00",
@@ -15,152 +15,210 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"source": {
-						"type": "JsonSource",
-						"storeSettings": {
-							"type": "AzureBlobStorageReadSettings",
-							"recursive": true,
-							"enablePartitionDiscovery": false
-						},
-						"formatSettings": {
-							"type": "JsonReadSettings"
-						}
-					},
-					"sink": {
-						"type": "DelimitedTextSink",
-						"storeSettings": {
-							"type": "AzureBlobStorageWriteSettings",
-							"copyBehavior": "FlattenHierarchy"
-						},
-						"formatSettings": {
-							"type": "DelimitedTextWriteSettings",
-							"quoteAllText": true,
-							"fileExtension": ".txt"
-						}
-					},
-					"enableStaging": false,
-					"translator": {
-						"type": "TabularTranslator",
-						"mappings": [
-							{
-								"source": {
-									"path": "$['creator']"
-								},
-								"sink": {
-									"name": "creator",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"path": "$['title']"
-								},
-								"sink": {
-									"name": "title",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"path": "$['link']"
-								},
-								"sink": {
-									"name": "link",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"path": "$['pubDate']"
-								},
-								"sink": {
-									"name": "pubDate",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"path": "$['content:encoded']"
-								},
-								"sink": {
-									"name": "content:encoded",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"path": "$['content:encodedSnippet']"
-								},
-								"sink": {
-									"name": "content:encodedSnippet",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"path": "$['dc:creator']"
-								},
-								"sink": {
-									"name": "dc:creator",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"path": "$['guid']"
-								},
-								"sink": {
-									"name": "guid",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"path": "$['isoDate']"
-								},
-								"sink": {
-									"name": "isoDate",
-									"type": "String"
-								}
-							}
-						],
-						"collectionReference": "$['categories']"
-					}
-				},
-				"inputs": [
-					{
-						"referenceName": "ds_Json_file_endpoint_generic_filename",
+					"dataset": {
+						"referenceName": "ds_Json_file_endpoint_generic",
 						"type": "DatasetReference",
 						"parameters": {
 							"container": "standard-raw",
-							"dir": {
+							"directory": {
 								"value": "@pipeline().parameters.dir",
-								"type": "Expression"
-							},
-							"file": {
-								"value": "@pipeline().parameters.file",
 								"type": "Expression"
 							}
 						}
+					},
+					"fieldList": [
+						"childItems"
+					],
+					"storeSettings": {
+						"type": "AzureBlobStorageReadSettings",
+						"enablePartitionDiscovery": false
+					},
+					"formatSettings": {
+						"type": "JsonReadSettings"
+					}
+				}
+			},
+			{
+				"name": "ForEach1",
+				"type": "ForEach",
+				"dependsOn": [
+					{
+						"activity": "Get Metadata1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
 					}
 				],
-				"outputs": [
-					{
-						"referenceName": "ds_csv_file_endpoint_generic_filename",
-						"type": "DatasetReference",
-						"parameters": {
-							"container": "standard-stage",
-							"dir": {
-								"value": "@pipeline().parameters.dir",
-								"type": "Expression"
+				"userProperties": [],
+				"typeProperties": {
+					"items": {
+						"value": "@activity('Get Metadata1').output.childItems",
+						"type": "Expression"
+					},
+					"isSequential": true,
+					"activities": [
+						{
+							"name": "ac_raw_to_stage_medium",
+							"type": "Copy",
+							"dependsOn": [],
+							"policy": {
+								"timeout": "7.00:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
 							},
-							"file": {
-								"value": "@concat(split(pipeline().parameters.file,'.' )[0],'.csv')",
-								"type": "Expression"
-							}
+							"userProperties": [],
+							"typeProperties": {
+								"source": {
+									"type": "JsonSource",
+									"storeSettings": {
+										"type": "AzureBlobStorageReadSettings",
+										"recursive": true,
+										"enablePartitionDiscovery": false
+									},
+									"formatSettings": {
+										"type": "JsonReadSettings"
+									}
+								},
+								"sink": {
+									"type": "DelimitedTextSink",
+									"storeSettings": {
+										"type": "AzureBlobStorageWriteSettings",
+										"copyBehavior": "FlattenHierarchy"
+									},
+									"formatSettings": {
+										"type": "DelimitedTextWriteSettings",
+										"quoteAllText": true,
+										"fileExtension": ".txt"
+									}
+								},
+								"enableStaging": false,
+								"translator": {
+									"type": "TabularTranslator",
+									"mappings": [
+										{
+											"source": {
+												"path": "$['creator']"
+											},
+											"sink": {
+												"name": "creator",
+												"type": "String"
+											}
+										},
+										{
+											"source": {
+												"path": "$['title']"
+											},
+											"sink": {
+												"name": "title",
+												"type": "String"
+											}
+										},
+										{
+											"source": {
+												"path": "$['link']"
+											},
+											"sink": {
+												"name": "link",
+												"type": "String"
+											}
+										},
+										{
+											"source": {
+												"path": "$['pubDate']"
+											},
+											"sink": {
+												"name": "pubDate",
+												"type": "String"
+											}
+										},
+										{
+											"source": {
+												"path": "$['content:encoded']"
+											},
+											"sink": {
+												"name": "content:encoded",
+												"type": "String"
+											}
+										},
+										{
+											"source": {
+												"path": "$['content:encodedSnippet']"
+											},
+											"sink": {
+												"name": "content:encodedSnippet",
+												"type": "String"
+											}
+										},
+										{
+											"source": {
+												"path": "$['dc:creator']"
+											},
+											"sink": {
+												"name": "dc:creator",
+												"type": "String"
+											}
+										},
+										{
+											"source": {
+												"path": "$['guid']"
+											},
+											"sink": {
+												"name": "guid",
+												"type": "String"
+											}
+										},
+										{
+											"source": {
+												"path": "$['isoDate']"
+											},
+											"sink": {
+												"name": "isoDate",
+												"type": "String"
+											}
+										}
+									],
+									"collectionReference": "$['categories']"
+								}
+							},
+							"inputs": [
+								{
+									"referenceName": "ds_Json_file_endpoint_generic_filename",
+									"type": "DatasetReference",
+									"parameters": {
+										"container": "standard-raw",
+										"dir": {
+											"value": "@pipeline().parameters.dir",
+											"type": "Expression"
+										},
+										"file": {
+											"value": "@item().name",
+											"type": "Expression"
+										}
+									}
+								}
+							],
+							"outputs": [
+								{
+									"referenceName": "ds_csv_file_endpoint_generic_filename",
+									"type": "DatasetReference",
+									"parameters": {
+										"container": "standard-stage",
+										"dir": {
+											"value": "@pipeline().parameters.dir",
+											"type": "Expression"
+										},
+										"file": {
+											"value": "@concat(split(item().name,'.' )[0],'.csv')",
+											"type": "Expression"
+										}
+									}
+								}
+							]
 						}
-					}
-				]
+					]
+				}
 			}
 		],
 		"parameters": {
