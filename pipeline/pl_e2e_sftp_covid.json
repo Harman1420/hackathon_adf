@@ -1,5 +1,5 @@
 {
-	"name": "pl_e2e_medium_user_ingestion",
+	"name": "pl_e2e_sftp_covid",
 	"properties": {
 		"activities": [
 			{
@@ -16,12 +16,14 @@
 				"userProperties": [],
 				"typeProperties": {
 					"source": {
-						"type": "RestSource",
-						"httpRequestTimeout": "00:01:40",
-						"requestInterval": "00.00:00:00.010",
-						"requestMethod": "GET",
-						"additionalHeaders": {
-							"Authorization": "Bearer 220aa0d06f283c04324b38b75378f39176a15afc67e38eeb7cbf166249da19fd7'"
+						"type": "DelimitedTextSource",
+						"storeSettings": {
+							"type": "SftpReadSettings",
+							"recursive": true,
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "DelimitedTextReadSettings"
 						}
 					},
 					"sink": {
@@ -37,11 +39,8 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "ds_rest_endpoint_generic",
-						"type": "DatasetReference",
-						"parameters": {
-							"url": "http://45d1-2401-4900-1c3c-882d-f8c7-4975-37be-e0cc.ngrok.io/run_ocr"
-						}
+						"referenceName": "sftp_csv",
+						"type": "DatasetReference"
 					}
 				],
 				"outputs": [
@@ -50,7 +49,7 @@
 						"type": "DatasetReference",
 						"parameters": {
 							"container": "standard-raw",
-							"dir": "medium_user",
+							"dir": "covid",
 							"file": {
 								"value": "@concat('covid_',formatDateTime(utcnow(), 'yyyy-MM-dd'),'.json')",
 								"type": "Expression"
