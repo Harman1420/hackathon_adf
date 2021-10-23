@@ -1,9 +1,9 @@
 {
-	"name": "pl_e2e_medium_src_ingestion_project",
+	"name": "pl_e2e_gitlab_src_ingestion_project",
 	"properties": {
 		"activities": [
 			{
-				"name": "ac_get_medium_blog_data_project",
+				"name": "ac_get_gitlab_data_project",
 				"type": "Copy",
 				"dependsOn": [],
 				"policy": {

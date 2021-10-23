@@ -1,5 +1,5 @@
 {
-	"name": "pl_e2e_medium_src_ingestion_repos",
+	"name": "pl_e2e_github_issue_repos",
 	"properties": {
 		"activities": [
 			{
@@ -52,7 +52,7 @@
 							"container": "standard-raw",
 							"dir": "github",
 							"file": {
-								"value": "@concat('github_repos_',formatDateTime(utcnow(), 'yyyy-MM-dd'),'.json')",
+								"value": "@concat('repos_',formatDateTime(utcnow(), 'yyyy-MM-dd'),'.json')",
 								"type": "Expression"
 							}
 						}

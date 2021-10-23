@@ -90,7 +90,7 @@
 						"referenceName": "generic_binary_dir",
 						"type": "DatasetReference",
 						"parameters": {
-							"container": "archive",
+							"container": "archive-raw",
 							"dir": {
 								"value": "@pipeline().parameters.dir",
 								"type": "Expression"

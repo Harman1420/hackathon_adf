@@ -1,5 +1,5 @@
 {
-	"name": "pl_e2e_medium_src_ingestion_project_issue",
+	"name": "pl_e2e_gitlab_project_issue",
 	"properties": {
 		"activities": [
 			{
@@ -52,7 +52,7 @@
 							"container": "standard-raw",
 							"dir": "gitlab",
 							"file": {
-								"value": "@concat('project_issue_',formatDateTime(utcnow(), 'yyyy-MM-dd'),'.json')",
+								"value": "@concat('projrct_issue_',formatDateTime(utcnow(), 'yyyy-MM-dd'),'.json')",
 								"type": "Expression"
 							}
 						}
