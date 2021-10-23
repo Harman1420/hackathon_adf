@@ -1,0 +1,9 @@
+{
+	"name": "df-lw-hackothon-dev",
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "6a409c64-7426-402f-a31c-fd5f22780743",
+		"tenantId": "317d9d2d-2b18-4d16-9c92-ca0a5eb30802"
+	}
+}
