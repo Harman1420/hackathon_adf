@@ -1,0 +1,92 @@
+{
+	"name": "pl_sf_src_e2e_copy1",
+	"properties": {
+		"activities": [
+			{
+				"name": "src",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "pl_e2e_medium_user_ingestion",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "Execute Pipeline2",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "src",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "pl_raw_to_stage",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true,
+					"parameters": {
+						"file": "\"\"",
+						"dir": "medium_user"
+					}
+				}
+			},
+			{
+				"name": "Execute Pipeline3",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "Execute Pipeline2",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "stage_sf",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true,
+					"parameters": {
+						"query": "copy into \"CUSTOMER_DEV_RAW\".\"MEDIUM\".\"T_MEDIUM_BLOG\"\n  from @CUSTOMER_DEV_RAW.MEDIUM.stg_lw_std\nfile_format = (type = csv field_optionally_enclosed_by='\"' skip_header = 1)\npattern='medium/abcd.csv'\non_error = 'skip_file';"
+					}
+				}
+			},
+			{
+				"name": "Execute Pipeline4",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "Execute Pipeline3",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "archive",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true,
+					"parameters": {
+						"container": "\"\"",
+						"dir": "medium_user"
+					}
+				}
+			}
+		],
+		"annotations": []
+	}
+}
