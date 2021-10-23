@@ -1,0 +1,23 @@
+{
+	"name": "ds_rest_endpoint_user",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_lw_rest_endpoint",
+			"type": "LinkedServiceReference",
+			"parameters": {
+				"url": {
+					"value": "@dataset().url",
+					"type": "Expression"
+				}
+			}
+		},
+		"parameters": {
+			"url": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "RestResource",
+		"schema": []
+	}
+}
