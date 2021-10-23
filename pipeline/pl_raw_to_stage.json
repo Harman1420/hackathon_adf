@@ -80,6 +80,24 @@
 							},
 							{
 								"source": {
+									"path": "$['content:encoded']"
+								},
+								"sink": {
+									"name": "content:encoded",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['content:encodedSnippet']"
+								},
+								"sink": {
+									"name": "content:encodedSnippet",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
 									"path": "$['dc:creator']"
 								},
 								"sink": {
@@ -98,15 +116,6 @@
 							},
 							{
 								"source": {
-									"path": "$['categories']"
-								},
-								"sink": {
-									"name": "items",
-									"type": "Guid"
-								}
-							},
-							{
-								"source": {
 									"path": "$['isoDate']"
 								},
 								"sink": {
@@ -115,7 +124,7 @@
 								}
 							}
 						],
-						"collectionReference": ""
+						"collectionReference": "$['categories']"
 					}
 				},
 				"inputs": [
@@ -124,8 +133,14 @@
 						"type": "DatasetReference",
 						"parameters": {
 							"container": "standard-raw",
-							"dir": "medium",
-							"file": "medium blog data updated.json"
+							"dir": {
+								"value": "@pipeline().parameters.dir",
+								"type": "Expression"
+							},
+							"file": {
+								"value": "@pipeline().parameters.file",
+								"type": "Expression"
+							}
 						}
 					}
 				],
@@ -135,13 +150,27 @@
 						"type": "DatasetReference",
 						"parameters": {
 							"container": "standard-stage",
-							"dir": "medium",
-							"file": "@concat('temp',formatDateTime(utcnow(), 'yyyy-MM-dd'),'.csv')"
+							"dir": {
+								"value": "@pipeline().parameters.dir",
+								"type": "Expression"
+							},
+							"file": {
+								"value": "@concat(split(pipeline().parameters.file,'.' )[0],'.csv')",
+								"type": "Expression"
+							}
 						}
 					}
 				]
 			}
 		],
+		"parameters": {
+			"file": {
+				"type": "string"
+			},
+			"dir": {
+				"type": "string"
+			}
+		},
 		"folder": {
 			"name": "Common Activity"
 		},
