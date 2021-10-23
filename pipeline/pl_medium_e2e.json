@@ -32,7 +32,11 @@
 						"referenceName": "pl_raw_to_stage",
 						"type": "PipelineReference"
 					},
-					"waitOnCompletion": true
+					"waitOnCompletion": true,
+					"parameters": {
+						"file": "\"\"",
+						"dir": "medium"
+					}
 				}
 			},
 			{
