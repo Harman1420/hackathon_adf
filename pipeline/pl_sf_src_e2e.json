@@ -1,5 +1,5 @@
 {
-	"name": "pl_gitlab_issue_e2e",
+	"name": "pl_sf_src_e2e",
 	"properties": {
 		"activities": [
 			{
@@ -9,7 +9,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"pipeline": {
-						"referenceName": "pl_e2e_gitlab_project_issue",
+						"referenceName": "pl_e2e_medium_user_ingestion",
 						"type": "PipelineReference"
 					},
 					"waitOnCompletion": true
@@ -35,7 +35,7 @@
 					"waitOnCompletion": true,
 					"parameters": {
 						"file": "\"\"",
-						"dir": "gitlab_issue"
+						"dir": "medium_user"
 					}
 				}
 			},
@@ -58,7 +58,7 @@
 					},
 					"waitOnCompletion": true,
 					"parameters": {
-						"query": "copy into \"CUSTOMER_DEV_RAW\".\"GIT_LAB\".\"GITLAB_COMMIT_ISSUES\"\n  from @CUSTOMER_DEV_RAW.GIT_LAB.stg_lw_std\nfile_format = (type = csv field_optionally_enclosed_by='\"' skip_header = 1)\npattern='gitlab_issue/*.csv'\non_error = 'skip_file';"
+						"query": "copy into \"CUSTOMER_DEV_RAW\".\"MEDIUM\".\"T_MEDIUM_BLOG\"\n  from @CUSTOMER_DEV_RAW.MEDIUM.stg_lw_std\nfile_format = (type = csv field_optionally_enclosed_by='\"' skip_header = 1)\npattern='medium/abcd.csv'\non_error = 'skip_file';"
 					}
 				}
 			},
@@ -82,7 +82,7 @@
 					"waitOnCompletion": true,
 					"parameters": {
 						"container": "\"\"",
-						"dir": "gitlab_issue"
+						"dir": "medium_user"
 					}
 				}
 			}
