@@ -50,7 +50,7 @@
 						"type": "DatasetReference",
 						"parameters": {
 							"container": "standard-raw",
-							"directory": "medium",
+							"directory": "medium.",
 							"file name": {
 								"value": "@concat('medium_blog_',formatDateTime(utcnow(), 'yyyy-MM-dd'))",
 								"type": "Expression"
